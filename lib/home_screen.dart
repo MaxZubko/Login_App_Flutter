@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'account_screen.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,12 @@ class HomeScreen extends StatelessWidget {
             tooltip: 'Share',
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen()));
+            }),
+        IconButton(
+            icon: Icon(Icons.account_circle),
+            tooltip: 'Your account',
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AccountScreen()));
             }),
         IconButton(
             icon: Icon(Icons.exit_to_app),
