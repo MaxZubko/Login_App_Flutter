@@ -1,108 +1,78 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
-import 'account_screen.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'Sports/sport_lists.dart';
+import 'Leagues/list_leagues.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('API'), actions: <Widget>[
-        IconButton(
-            icon: Icon(Icons.share),
-            tooltip: 'Share',
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen()));
-            }),
-        IconButton(
-            icon: Icon(Icons.account_circle),
-            tooltip: 'Your account',
-            onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AccountScreen()));
-            }),
-        IconButton(
-            icon: Icon(Icons.exit_to_app),
-            tooltip: 'Logout',
-            onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()));
-            }),
-      ]),
-      body: IistOnline(
-        items: <String>[],
-      ),
-    );
-  }
+  State<StatefulWidget> createState() => HomeScreenState();
 }
 
-class IistOnline extends StatefulWidget {
-  _IistOnlineState createState() => _IistOnlineState();
-
-  final List<String> items;
-  IistOnline({Key key, @required this.items,}) : super(key: key);
-}
-
-class _IistOnlineState extends State<IistOnline> {
-  List data;
-
-  Future<String> getData() async {
-    final response = await http.get(
-        Uri.encodeFull("https://api.myjson.com/bins/8jxuc"), headers: {"Accept": "application/json"});
-
-    this.setState(() {
-      data = json.decode(response.body);
-    });
-    return "Success!";
-  }
+class HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  TabController controller;
 
   @override
   void initState() {
     super.initState();
-    this.getData();
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getData(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: data == null ? 0 : data.length,
-            itemBuilder: (BuildContext context, int i) {
-              return ListTile(
-                title: Text(data[i]['title']),
-                subtitle: Text(data[i]['subtitle']),
-              );
-            },
-          );
-        }
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 160,
-              height: 150,
-            ),
-            CircularProgressIndicator(
-              strokeWidth: 5,
-            ),
-          ],
-        );
-      }
-    );
-  }
-}
 
-class SecondScreen extends StatelessWidget {
+    controller = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("More"),
-      ),
-      body: Text("Go back!")
-    );
+        appBar: AppBar(
+            title: Text('Sports'),
+            backgroundColor: Colors.blueGrey[900],
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.share),
+                  tooltip: 'Share',
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/second_screen');
+                  }),
+              IconButton(
+                  icon: Icon(Icons.account_circle),
+                  tooltip: 'Your account',
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed('/account_screen');
+                  }),
+              IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  tooltip: 'Logout',
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/login_screen');
+                  }),
+            ]),
+        body: TabBarView(
+          children: <Widget>[SportList(), LeagueList()],
+          controller: controller,
+        ),
+        bottomNavigationBar: Container(
+          height: 45,
+          child: Material(
+            color: Colors.blueGrey[900],
+            child: TabBar(
+              tabs: <Tab>[
+                Tab(
+                  icon: Icon(Icons.category),
+                  //text: "List Sports",
+                ),
+                Tab(
+                  icon: Icon(Icons.library_books),
+                  //text: "List Leagues",
+                ),
+              ],
+              controller: controller,
+            ),
+          ),
+        ));
   }
 }

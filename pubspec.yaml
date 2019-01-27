@@ -17,6 +17,7 @@ dependencies:
   path_provider: ^0.4.1
   image_picker: ^0.4.4
   image_cropper: ^0.0.4
+  url_launcher: ^4.2.0+1
   flutter:
     sdk: flutter
 
@@ -47,6 +48,10 @@ flutter:
   assets:
     - img/img_login.png
     - img/imagePath.png
+    - img/web.png
+    - img/facebook.png
+    - img/instagram.png
+    - img/youtube.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
