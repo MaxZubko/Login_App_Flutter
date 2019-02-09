@@ -40,8 +40,6 @@ class MyMapState extends State<MyMap> {
     mapController.addMarker(
       MarkerOptions(
         position: LatLng( 50.006406, 36.236484
-          // mapController.cameraPosition.target.latitude,
-          // mapController.cameraPosition.target.longitude,
           ),
         infoWindowText: InfoWindowText('My Location', 'Office'),
         icon: BitmapDescriptor.defaultMarker,

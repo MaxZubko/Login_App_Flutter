@@ -44,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 0.0),
                         child: TextFormField(
-                          // controller: email,
                           validator: (input) {
                             if(input.isEmpty) {
                               return 'Please type an email';
@@ -63,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 0.0),
                         child: TextFormField(
-                          //controller: password,
                           validator: (input) {
                             if(input.length < 6) {
                               return 'Your password needs to be atleast 6 characters';
@@ -196,6 +194,10 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     );
       return Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
+
+  // saveDataPreference() async {
+
+  // }
 }
 
 class SecondScreen extends StatelessWidget {

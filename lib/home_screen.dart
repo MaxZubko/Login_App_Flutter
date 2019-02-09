@@ -89,7 +89,7 @@ class MyDrawerState extends State<MyDrawer> {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 decoration: BoxDecoration(color: Colors.blueGrey[900]),
-                accountName: Text(sharedPreferenceEmail),
+                accountName: sharedPreferenceEmail != null ? Text( sharedPreferenceEmail ) : Container(),
                 accountEmail: Text(" "),
                 currentAccountPicture: CircleAvatar(
                   child: FlutterLogo(size: 40),
@@ -100,7 +100,7 @@ class MyDrawerState extends State<MyDrawer> {
                 title: Text('About us'),
                 leading: Icon(Icons.people, color: Colors.blueGrey[400]),
                 onTap: () {
-                  // Navigator.pop(ctxt);
+                  Navigator.pop(ctxt);
                   Navigator.push(ctxt,
                     MaterialPageRoute(builder: (ctxt) => AboutUs())
                     );
@@ -110,7 +110,7 @@ class MyDrawerState extends State<MyDrawer> {
                 title: Text('Logout'),
                 leading: Icon(Icons.exit_to_app, color: Colors.blueGrey[400]),
                 onTap: () {
-                  // Navigator.pop(ctxt);
+                  Navigator.pop(ctxt);
                   removeDataPreference();
                   Navigator.of(ctxt,).pushReplacementNamed('/login_screen');
                 },

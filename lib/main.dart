@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'account_screen.dart';
 import 'home_screen.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// SharedPreferences auth;
 
 void main() => runApp(MyApp());
 
@@ -9,7 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginScreen(),
+      home: 
+      // AuthStatus(),
+      LoginScreen(),
       theme: ThemeData(
           primarySwatch: Colors.blueGrey, brightness: Brightness.dark),
       routes: <String, WidgetBuilder>{
@@ -21,3 +25,20 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// class AuthStatus extends StatelessWidget {
+//   @override
+  
+ 
+//   // Widget build(BuildContext context) {
+//   //   checkIfAuthenticated().then((success) {
+//   //     if (success) {
+//   //       Navigator.pushReplacementNamed(context, '/home_screen');
+//   //     } else {
+//   //       Navigator.pushReplacementNamed(context, '/login_screen');
+//   //     }
+//   //   });
+//   //   return Center(child: CircularProgressIndicator());
+//   // }
+// }
