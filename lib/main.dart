@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'account_screen.dart';
 import 'home_screen.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// SharedPreferences auth;
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,9 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: 
-      // AuthStatus(),
-      LoginScreen(),
+      home: AuthStatus(),
       theme: ThemeData(
           primarySwatch: Colors.blueGrey, brightness: Brightness.dark),
       routes: <String, WidgetBuilder>{
@@ -26,19 +23,48 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class AuthStatus extends StatefulWidget {
+  @override
+  AuthStatusState createState() => AuthStatusState();
+}
+
+class AuthStatusState extends State<AuthStatus> {
+  SharedPreferences sharedPreferences;
+  String value;
+
+  @override
+  void initState() {
+    super.initState();
+    auth();
+  }
+
+  auth() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      value = sharedPreferences.getString("email");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (value == null) {
+      return LoginScreen();
+    } else {
+      return HomeScreen();
+    }
+  }
+}
 
 // class AuthStatus extends StatelessWidget {
 //   @override
-  
- 
-//   // Widget build(BuildContext context) {
-//   //   checkIfAuthenticated().then((success) {
-//   //     if (success) {
-//   //       Navigator.pushReplacementNamed(context, '/home_screen');
-//   //     } else {
-//   //       Navigator.pushReplacementNamed(context, '/login_screen');
-//   //     }
-//   //   });
-//   //   return Center(child: CircularProgressIndicator());
-//   // }
+  // Widget build(BuildContext context) {
+  //   checkIfAuthenticated().then((success) {
+  //     if (success) {
+  //       Navigator.pushReplacementNamed(context, '/home_screen');
+  //     } else {
+  //       Navigator.pushReplacementNamed(context, '/login_screen');
+  //     }
+  //   });
+  //   return Center(child: CircularProgressIndicator());
+  // }
 // }

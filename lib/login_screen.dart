@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(60),
+                      padding: EdgeInsets.all(28),
                     ),
                     FlatButton(
                         child: Text('Forgot passwor?'),
@@ -192,12 +192,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       idToken: gSa.idToken,
       accessToken: gSa.accessToken
     );
-      return Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    return Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
-
-  // saveDataPreference() async {
-
-  // }
 }
 
 class SecondScreen extends StatelessWidget {
