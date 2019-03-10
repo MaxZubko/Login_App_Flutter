@@ -27,6 +27,8 @@ dependencies:
   location: ^1.4.1
   shared_preferences: ^0.5.0
   flutter_facebook_login: ^1.2.0
+  cloud_firestore:
+  flutter_slidable: ^0.4.9
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +57,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - img/sport.jpg
+    - img/sprt.jpg
     - img/imagePath.png
     - img/web.png
     - img/facebook.png

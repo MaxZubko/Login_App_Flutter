@@ -4,6 +4,8 @@ import 'account_screen.dart';
 import 'home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
+import 'package:login_program/tickets/tickets_bloc.dart';
+import 'package:login_program/blocs/bloc_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey, brightness: Brightness.dark),
       routes: <String, WidgetBuilder>{
         '/login_screen': (BuildContext context) => LoginScreen(),
-        '/home_screen': (BuildContext context) => HomeScreen(),
+        '/home_screen': (BuildContext context) => BlocProvider<TicketsBloc>(child: HomeScreen(), bloc: TicketsBloc()),
         '/account_screen': (BuildContext context) => AccountScreen(),
         '/second_screen': (BuildContext context) => SecondScreen(),
       },
@@ -54,8 +56,9 @@ class AuthStatusState extends State<AuthStatus> {
   Widget build(BuildContext context) {
     if (value == null) {
       return LoginScreen();
+      // BlocProvider<TicketsBloc>(child: LoginScreen(), bloc: TicketsBloc());
     } else {
-      return HomeScreen();
+      return BlocProvider<TicketsBloc>(child: HomeScreen(), bloc: TicketsBloc());
     }
   }
 }

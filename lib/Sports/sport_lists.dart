@@ -12,6 +12,11 @@ class SportListState extends State<SportList> {
   final String url = "https://www.thesportsdb.com/api/v1/json/1/all_sports.php";
   List data;
 
+  @override
+  void initState() {
+    this.getSportList();
+  }
+
   Future<String> getSportList() async {
     var response = await http.get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
     print(response.body);
@@ -22,10 +27,7 @@ class SportListState extends State<SportList> {
     });
     return "Successfull";
   }
-  @override
-  void initState() {
-    this.getSportList();
-  }
+  
  
   @override
   Widget build(BuildContext context) {
